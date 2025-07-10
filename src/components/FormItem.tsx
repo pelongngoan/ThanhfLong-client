@@ -1,7 +1,7 @@
-import React from "react";
+import type { ReactNode } from "react";
 
 interface FormItemProps {
-  children: React.ReactNode;
+  children: ReactNode;
   label: string;
   error?: string;
 }
