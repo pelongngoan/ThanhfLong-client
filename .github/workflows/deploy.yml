@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Download artifact from S3
+      - name: Download vite-dist.zip from S3
         run: |
           aws s3 cp s3://${{ secrets.ARTIFACT_BUCKET }}/vite-dist.zip vite-dist.zip
           unzip vite-dist.zip -d dist
@@ -17,7 +17,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
 
-      - name: Deploy to S3 (Production Bucket)
+      - name: Deploy to S3 Website Bucket
         uses: jakejarvis/s3-sync-action@master
         with:
           args: --delete
