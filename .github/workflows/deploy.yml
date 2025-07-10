@@ -32,9 +32,6 @@ jobs:
         run: |
           aws s3 cp s3://${{ secrets.ARTIFACT_BUCKET }}/vite-dist.zip vite-dist.zip
           unzip vite-dist.zip
-          # Di chuyển files từ dist/ ra root level
-          mv dist/* .
-          rmdir dist
           ls -la
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
