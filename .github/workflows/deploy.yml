@@ -1,11 +1,18 @@
 name: Deploy to AWS S3
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: # Vẫn giữ trigger thủ công
+  workflow_run: # Thêm trigger tự động sau khi build thành công
+    workflows: ["Build and Upload Artifact"]
+    types:
+      - completed
+    branches: [main, dev]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    # Chỉ chạy khi workflow build thành công
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
 
     steps:
       - name: Download vite-dist.zip from S3
