@@ -1,8 +1,8 @@
 name: Deploy to AWS S3
 
 on:
-  workflow_dispatch: # Trigger thủ công
-  workflow_run: # Trigger tự động sau khi build thành công
+  workflow_dispatch:
+  workflow_run:
     workflows: ["Build and Upload Artifact"]
     types:
       - completed
@@ -14,7 +14,6 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    # Chỉ chạy khi workflow build thành công hoặc trigger thủ công
     if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
 
     steps:
