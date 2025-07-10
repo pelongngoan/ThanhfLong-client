@@ -31,7 +31,9 @@ jobs:
       - name: Download vite-dist.zip from S3
         run: |
           aws s3 cp s3://${{ secrets.ARTIFACT_BUCKET }}/vite-dist.zip vite-dist.zip
-          unzip vite-dist.zip -d dist
+          unzip vite-dist.zip
+          ls -la
+          ls -la dist/
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
